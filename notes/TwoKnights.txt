@@ -1,0 +1,14 @@
+Basically a combinatorics problem
+
+Easy to figure that we initally take all possible combinations of knight pairs
+in the chess board (k^2 C 2 where k is the length of the board) and 
+remove the attacking combinations
+
+Take a 2*3 block =>  we have 2 such knight pair positions in the block and (k-1)(k-2) such blocks in a k*k board.
+Now again for the 3*2 board we have 2 such pair positions and the same number of blocks.
+This covers all possible attacking combinations
+
+Which gives a total of 4 * (k - 1) * (k - 2) attacking combinations
+
+Result => (k^2 C 2) - (4 * (k - 1) * (k - 2))
+

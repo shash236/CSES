@@ -11,21 +11,12 @@ public class TwoKnights {
         PrintWriter out = new PrintWriter(new BufferedOutputStream(System.out));
 
         int n = scanner.nextInt();
-        int attackingCombinations = 0;
         for(int k = 1; k <= n; k++){
             int ksq = k*k;
             long totolCombos = ((long)ksq * (ksq-1))/2;
-            if(k == 3){
-                attackingCombinations = 8;
-            }else if(k > 3){
-                //new column
-                attackingCombinations += 10;
-                attackingCombinations += (k - 4)*4;
-
-                //new row
-                attackingCombinations += 10;
-                if(k > 4) attackingCombinations += (k-5)*4;
-                else attackingCombinations -= 4;
+            int attackingCombinations = 0;
+            if(k > 2){
+                attackingCombinations = 4 * (k-1) *(k-2);
             }
             out.println(totolCombos - attackingCombinations);
         }
