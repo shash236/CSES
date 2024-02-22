@@ -1,0 +1,9 @@
+Got stuck in the correct way to divide into 2 sets of equal sum
+
+Could be done if we add numbers in the decreasing order greedily into setA while checking we don't end up
+with a total greater than half the sum of all n numbers.
+
+Cannot be done in the increasing order due to repeats
+For n = 7
+SetA sum total Target is 14
+ex : 1 + 2 + 3 + 4 => X (Cannot proceed anymore)
