@@ -3,25 +3,20 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.StringTokenizer;
 
-public class NumberSpiral {
+public class DistinctNumbers{
     public static void main(String[] args) {
-        FastReader fastReader = new FastReader();
+        FastReader scanner = new FastReader();
         PrintWriter out = new PrintWriter(new BufferedOutputStream(System.out));
-
-        int t = fastReader.nextInt();
-        for(int i = 0; i < t; i++){
-            long y = fastReader.nextInt();
-            long x = fastReader.nextInt();
-            if(y >= x){
-                if(y%2==0) out.println(y*y - x + 1);
-                else out.println((y-1)*(y-1) + x);
-            }else{
-                if(x%2==0) out.println((x-1)*(x-1) + y);
-                else out.println(x*x - y + 1);
-            }
+        int n = scanner.nextInt();
+        Set<Integer> set = new HashSet<>();
+        for(int i = 0; i < n; i++) {
+            set.add(scanner.nextInt());
         }
+        out.println(set.size());
         out.flush();
         out.close();
     }
@@ -71,5 +66,3 @@ public class NumberSpiral {
         }
     }
 }
-
-

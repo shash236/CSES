@@ -1,3 +1,4 @@
+
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -5,32 +6,23 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
-public class Permutations {
+public class NumberSpiral {
     public static void main(String[] args) {
-        FastReader scanner = new FastReader();
+        FastReader fastReader = new FastReader();
         PrintWriter out = new PrintWriter(new BufferedOutputStream(System.out));
-        
-        int n = scanner.nextInt();
-        if(n == 2 || n == 3){
-            System.out.println("NO SOLUTION");
-        }else{
-            // print all even numbers till n
-            int num = 2;
-            while(num <= n){
-                out.print(num);
-                out.print(' ');
-                num+=2;
-            }
-            // print all odd numbers till n
-            num = 1;
-            while(num <= n){
-                out.print(num);
-                out.print(' ');
-                num+=2;
+
+        int t = fastReader.nextInt();
+        for(int i = 0; i < t; i++){
+            long y = fastReader.nextInt();
+            long x = fastReader.nextInt();
+            if(y >= x){
+                if(y%2==0) out.println(y*y - x + 1);
+                else out.println((y-1)*(y-1) + x);
+            }else{
+                if(x%2==0) out.println((x-1)*(x-1) + y);
+                else out.println(x*x - y + 1);
             }
         }
-        
-        out.println();
         out.flush();
         out.close();
     }
@@ -79,5 +71,6 @@ public class Permutations {
             return str;
         }
     }
-
 }
+
+
