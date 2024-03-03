@@ -1,0 +1,8 @@
+2 pointers on the sorted apartments and applicants
+We can greedily assign apartments to get the best applicant by placing a ptr 
+on each of the array and picking the smallest apartment for a applicant 
+or skipping the applicant entirely
+But why does greedy work here? 
+Because if for each applicant (that gets picked) we assign the smallest apartment possible, 
+we leave larger apartments for applicants with larger requirements
+(note : TC#17 gives TLE for Java)
