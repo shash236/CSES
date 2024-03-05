@@ -1,3 +1,20 @@
-10 10 0
-37 62 56 69 34 46 10 86 16 49
-50 95 47 43 9 62 83 71 71 7
+aabac
+aacab
+caaba
+cbaaa
+aabca
+aaacb
+caaab
+cabaa
+acaab
+acbaa
+aaabc
+aacba
+abaac
+abcaa
+baaca
+bcaaa
+baaac
+bacaa
+abaca
+acaba
