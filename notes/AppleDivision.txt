@@ -1,0 +1,4 @@
+Was confused at first, thought that the logic was similar to the two sets problem. 
+Need to figure out why does two set's algo work in the first place
+Hint to use backtracking to generate all possible sums lies in how n is just 20.
+
