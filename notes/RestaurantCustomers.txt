@@ -1,0 +1,19 @@
+Brute force approach : For every interval provided, increment the count values of 
+those positions in that interval by 1. Once done, for every one of the provided intervals,
+find and return the max count for all of the positions.
+
+Clearly very slow.
+
+Optimized approach : the operation of increamenting the count for each position in the 
+interval can also be done in a better way below.
+
+interval => 2 4
+
+prefix_sum_arr => 0 0 1 0 -1 0 0
+
+Doing the prefix sum of this array, will give us the same result as increment the count values of 
+those positions in the interval one by one.
+
+Using the above idea we now have to do only one iteration.
+
+

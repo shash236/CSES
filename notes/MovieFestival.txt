@@ -1,0 +1,8 @@
+Greed approach : Let's pick the preferred intervals one by one based on order(in this case : time).
+
+Suppose that 2 intervals overlap. Which is to be selected? 
+
+We need to select the one which is closer and covers lesser distance.
+
+For ex : [2,5] and [4,9] => they overlap, hence we need to pick any one of these intervals.
+We pick [2,5] because that allows more movies to be freely watched than [4,9] (9 is much later than 5)
