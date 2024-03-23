@@ -1,0 +1,10 @@
+length of all 1 digit numbers = (1 * 9);
+length of all 2 digit numbers = (2 * 90);
+length of all 3 digit numbers = (2 * 90);
+
+
+total length from all 1 digit to n digit numbers 
+    = (1 * 9) + (2 * 90) + (3 * 900) + ... + (n * 9 * 10^(n-1));
+
+Basically need to find how many digits does the number that occurs
+at the query positions have. Rest is simple. 
