@@ -3,51 +3,57 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.TreeMap;
 
-public class RestaurantCustomers {
-    
+public class SumOfTwoValues {
     public static void main(String[] args) {
         FastReader scanner = new FastReader();
         PrintWriter out = new PrintWriter(new BufferedOutputStream(System.out));
 
         int n = scanner.nextInt();
-        int[][] arr = new int[n][2];
+        int x = scanner.nextInt();
+        int[] arr = new int[n];
         for(int i = 0; i < n; i++) {
-            arr[i][0] = scanner.nextInt();
-            arr[i][1] = scanner.nextInt();
+            arr[i] = scanner.nextInt();
         }
-        out.println(solve(arr, n));
+        int[] soln = solve(x, arr, n);
+        if(soln==null){
+            out.println("IMPOSSIBLE");
+        }else{
+            out.println((soln[0]+1) + " " + (soln[1]+1));
+        }
         out.flush();
         out.close();
     }
 
-    private static int solve(int[][] arr, int n){
-        TreeMap<Integer, Integer> map = new TreeMap<>();
-        for(int i = 0; i< n; i++) {
-            if(map.get(arr[i][0])==null){
-                map.put(arr[i][0],1);
+    private static int[] solve(int x, int[] arr, int n) {
+        final Map<Integer, int[]> map = new HashMap<>();
+        for(int i = 0; i < n; i++) {
+            if(map.get(arr[i])==null){
+                map.put(arr[i],new int[] {i,-1});
             }else{
-                map.put(arr[i][0],map.get(arr[i][0])+1);
+                map.get(arr[i])[1] = i;
             }
+        }
 
-            if(map.get(arr[i][1])==null){
-                map.put(arr[i][1],-1);
-            }else{
-                map.put(arr[i][1],map.get(arr[i][1])-1);
+        for(int i = 0; i < n; i++) {
+            int y = x - arr[i]; // y + arr[i] = x
+            int[] yPositions = map.get(y);
+            if(yPositions!=null){
+                if(yPositions[0] != i){
+                    return new int[] {i,yPositions[0]};
+                }else if(yPositions[1] != -1){
+                    return new int[] {i,yPositions[1]};
+                }
             }
         }
-        int curr = 0;
-        int maxval = 0;
-        for(int pos : map.keySet()){
-            curr += map.get(pos);
-            maxval = Math.max(curr,maxval);
-        }
-        return maxval;
+
+        return null;
     }
 
-        static class FastReader {
+    static class FastReader {
  
         BufferedReader br;
         StringTokenizer st;

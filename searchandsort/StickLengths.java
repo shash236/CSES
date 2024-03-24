@@ -3,48 +3,34 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.StringTokenizer;
-import java.util.TreeMap;
 
-public class RestaurantCustomers {
+public class StickLengths {
     
     public static void main(String[] args) {
         FastReader scanner = new FastReader();
         PrintWriter out = new PrintWriter(new BufferedOutputStream(System.out));
 
         int n = scanner.nextInt();
-        int[][] arr = new int[n][2];
+        int[] arr = new int[n];
         for(int i = 0; i < n; i++) {
-            arr[i][0] = scanner.nextInt();
-            arr[i][1] = scanner.nextInt();
+            arr[i] = scanner.nextInt();
         }
-        out.println(solve(arr, n));
+        out.println(solve(arr,n));
+        
         out.flush();
         out.close();
     }
 
-    private static int solve(int[][] arr, int n){
-        TreeMap<Integer, Integer> map = new TreeMap<>();
-        for(int i = 0; i< n; i++) {
-            if(map.get(arr[i][0])==null){
-                map.put(arr[i][0],1);
-            }else{
-                map.put(arr[i][0],map.get(arr[i][0])+1);
-            }
-
-            if(map.get(arr[i][1])==null){
-                map.put(arr[i][1],-1);
-            }else{
-                map.put(arr[i][1],map.get(arr[i][1])-1);
-            }
+    private static long solve(int[] arr, int n) {
+        Arrays.sort(arr);
+        int median = arr[(n-1)/2];
+        long diff = 0;
+        for (int a : arr) {
+            diff += Math.abs(median - a);
         }
-        int curr = 0;
-        int maxval = 0;
-        for(int pos : map.keySet()){
-            curr += map.get(pos);
-            maxval = Math.max(curr,maxval);
-        }
-        return maxval;
+        return diff;
     }
 
         static class FastReader {
@@ -91,5 +77,6 @@ public class RestaurantCustomers {
             return str;
         }
     }
+
 
 }
