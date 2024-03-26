@@ -1,0 +1,19 @@
+Once we generate a position array from the given list of numbers,
+its easy to see that we need to start another round each time there
+is drop
+
+example :-
+
+list : 4 2 1 5 3
+position_array : 3 2 5 1 4 (if i is the index position_array[i] 
+tells us where the value i occurs in the list)
+
+drops 
+3 -> 2 => round++
+5 -> 1 => round++
+
+For the II problem, we just reverse the impact of that position
+and recalculate if a drop is created in the position newly
+
+
+
