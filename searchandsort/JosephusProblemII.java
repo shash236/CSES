@@ -1,49 +1,44 @@
-package utils;
-
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.LinkedList;
 import java.util.StringTokenizer;
 
-public class Utils {
-    private Utils(){}
-
+public class JosephusProblemII {
     public static void main(String[] args) {
-        int[] arr = new int[] {1, 2, 3, 4, 5};
-        System.out.println(upperBound(arr,6));
+        FastReader scanner = new FastReader();
+        PrintWriter out = new PrintWriter(new BufferedOutputStream(System.out));
+
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+        int[] ans = solve(n,k);
+        for (int a : ans) {
+            out.println(a);
+        }
+        
+        out.flush();
+        out.close();
     }
-    
-    // smallest number in a sorted array that is greater than key
-    private static int upperBound(int[] a, int key) {
-        int n = a.length;
-        int s = 0; int e = n-1;
-        int pos = n; // n happens in case when the largest number in a is less than key
-        while(s <= e){
-            int mid = s + (e - s)/2; // avoids overflow
-            if(a[mid] < key){
-                s = mid + 1;
-            }else if(a[mid] > key){
-                e = mid - 1;
-                pos = mid;
-            }else{
-                s = mid + 1;
+
+    private static int[] solve(int n, int k) {
+        LinkedList<Integer> list = new LinkedList<>();
+        for(int i = 1; i <= n; i++) { list.add(i); }
+        int p = k%n;
+        int i = 0;
+        int[] ans = new int[n];
+        while(!list.isEmpty()){
+            ans[i] = list.get(p);
+            list.remove(p);
+            if(!list.isEmpty()){
+                p = (p+k) % list.size();
             }
+            i++;
         }
-        return pos;
+        return ans;
     }
 
-    // faster mod of  x^n % m;
-    public static int modPower(int x, int n, int m){
-        if(n == 0) return 1;
-        else if(n % 2 == 0) {
-            int u = modPower(x, n/2, m);
-            return (int)(((long)u*u)%m);
-        }else {
-            return (modPower(x, n-1, m) * x)%m;
-        }
-    }
-
-    // fast reader
     static class FastReader {
  
         BufferedReader br;

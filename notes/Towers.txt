@@ -1,0 +1,7 @@
+Greedy approach : For each cube we either start a new tower or 
+put it on top a another tower. If we have 2 towers on which can place this cube,
+we must choose the one which is smaller because that more larger cubes that can 
+come later to find a tower.
+
+If we keep the track of the top of all the towers, we get a sorted array, 
+so now the tower we need to place our cube is just the upper bound 

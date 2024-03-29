@@ -1,0 +1,20 @@
+Let's order the ranges given in the example
+
+l r
+----
+1 13
+1 6
+2 4
+3 6
+4 8
+
+The intuition to solve this problem is that for the range at index i in the above sorted
+to be contained any of the ranges below it should have higher right value (prefix max). 
+
+In the same way for the same range to contain any other ranges, the any one of the ranges 
+below it should have a lower right value (suffix min).
+
+Note : In the case 2 ranges have same left value the range with greater right value occurs 
+before the other since we are trying the order based on the coverage
+
+

@@ -1,28 +1,51 @@
-package utils;
-
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
-public class Utils {
-    private Utils(){}
+public class Towers {
 
     public static void main(String[] args) {
-        int[] arr = new int[] {1, 2, 3, 4, 5};
-        System.out.println(upperBound(arr,6));
+        FastReader scanner = new FastReader();
+        PrintWriter out = new PrintWriter(new BufferedOutputStream(System.out));
+
+        int n = scanner.nextInt();
+        int[] arr = new int[n];
+        for(int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
+        out.println(solve(n, arr));
+        
+        out.flush();
+        out.close();
     }
     
-    // smallest number in a sorted array that is greater than key
-    private static int upperBound(int[] a, int key) {
-        int n = a.length;
+    private static int solve(int n, int[] arr) {
+        List<Integer> towers = new ArrayList<>();
+        for(int i = 0; i < n; i++) {
+            int towerNum = upperBound(towers, arr[i]);
+            if(towerNum == towers.size()){
+                towers.add(arr[i]);
+            }else{
+                towers.set(towerNum,arr[i]);
+            }
+        }
+        return towers.size();
+    }
+
+    private static int upperBound(List<Integer> a, int key) {
+        int n = a.size();
         int s = 0; int e = n-1;
         int pos = n; // n happens in case when the largest number in a is less than key
         while(s <= e){
             int mid = s + (e - s)/2; // avoids overflow
-            if(a[mid] < key){
+            if(a.get(mid) < key){
                 s = mid + 1;
-            }else if(a[mid] > key){
+            }else if(a.get(mid) > key){
                 e = mid - 1;
                 pos = mid;
             }else{
@@ -32,18 +55,6 @@ public class Utils {
         return pos;
     }
 
-    // faster mod of  x^n % m;
-    public static int modPower(int x, int n, int m){
-        if(n == 0) return 1;
-        else if(n % 2 == 0) {
-            int u = modPower(x, n/2, m);
-            return (int)(((long)u*u)%m);
-        }else {
-            return (modPower(x, n-1, m) * x)%m;
-        }
-    }
-
-    // fast reader
     static class FastReader {
  
         BufferedReader br;
