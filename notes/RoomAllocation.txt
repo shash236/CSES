@@ -1,0 +1,7 @@
+We use a stack in the solution.
+The stack gives us list of available rooms.
+We add all the arrival and departure times in a list , and then sort them while maintaining the customer position and +1 or -1 depending on arrival or departure.
+We iterate over all the arrival and departure times.
+If the current time is arrival time, we check the stack for any available room(peek).
+If the stack is empty, we add a room to the stack and increase maximum rooms.
+If the current time is the departure time, we re-add whatever room was assigned to the customer.
