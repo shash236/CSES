@@ -1,48 +1,38 @@
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class Utils {
-    private Utils(){}
-
+public class TasksAndDeadlines {
     public static void main(String[] args) {
-        int[] arr = new int[] {1, 2, 3, 4, 5};
-        System.out.println(upperBound(arr,6));
-    }
-    
-    // smallest number in a sorted array that is greater than key
-    private static int upperBound(int[] a, int key) {
-        int n = a.length;
-        int s = 0; int e = n-1;
-        int pos = n; // n happens in case when the largest number in a is less than key
-        while(s <= e){
-            int mid = s + (e - s)/2; // avoids overflow
-            if(a[mid] < key){
-                s = mid + 1;
-            }else if(a[mid] > key){
-                e = mid - 1;
-                pos = mid;
-            }else{
-                s = mid + 1;
-            }
+        FastReader scanner = new FastReader();
+        PrintWriter out = new PrintWriter(new BufferedOutputStream(System.out));
+        int n = scanner.nextInt();
+        int[][] arr = new int[n][2];
+        for(int i = 0; i < n; i++) {
+            arr[i][0] = scanner.nextInt();
+            arr[i][1] = scanner.nextInt();
         }
-        return pos;
+        out.println(calculuateReward(n, arr));
+        out.flush();
+        out.close();
+    }    
+
+    private static long calculuateReward(int n, int[][] tasks) {
+        Arrays.sort(tasks,(a,b)->Integer.compare(a[0],b[0]));
+        long time = 0;
+        long reward = 0;
+        for(int i = 0; i < n; i++){
+            time += tasks[i][0];
+            reward += tasks[i][1] - time;
+        }
+        return reward;
     }
 
-    // faster mod of  x^n % m;
-    public static int modPower(int x, int n, int m){
-        if(n == 0) return 1;
-        else if(n % 2 == 0) {
-            int u = modPower(x, n/2, m);
-            return (int)(((long)u*u)%m);
-        }else {
-            return (modPower(x, n-1, m) * x)%m;
-        }
-    }
-
-    // fast reader
-    static class FastReader {
+        static class FastReader {
  
         BufferedReader br;
         StringTokenizer st;

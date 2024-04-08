@@ -1,47 +1,36 @@
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
-public class Utils {
-    private Utils(){}
+public class DiceCombinations {
+
+    private final static int m = 1000000007; 
 
     public static void main(String[] args) {
-        int[] arr = new int[] {1, 2, 3, 4, 5};
-        System.out.println(upperBound(arr,6));
+        FastReader scanner = new FastReader();
+        PrintWriter out = new PrintWriter(new BufferedOutputStream(System.out));
+        int a = scanner.nextInt();
+        out.println(solve(a));
+        out.flush();
+        out.close();
     }
-    
-    // smallest number in a sorted array that is greater than key
-    private static int upperBound(int[] a, int key) {
-        int n = a.length;
-        int s = 0; int e = n-1;
-        int pos = n; // n happens in case when the largest number in a is less than key
-        while(s <= e){
-            int mid = s + (e - s)/2; // avoids overflow
-            if(a[mid] < key){
-                s = mid + 1;
-            }else if(a[mid] > key){
-                e = mid - 1;
-                pos = mid;
-            }else{
-                s = mid + 1;
+
+    private static int solve (int a) {
+        int[] arr = new int[a+1];
+        arr[0] = 1;
+        for(int i = 1; i <= a; i++) {
+            int x = 1;
+            while(x <= 6 && i - x >= 0){
+                arr[i] = (arr[i] + arr[i-x]) % m;
+                x++;
             }
         }
-        return pos;
+        return arr[a] % m;
     }
 
-    // faster mod of  x^n % m;
-    public static int modPower(int x, int n, int m){
-        if(n == 0) return 1;
-        else if(n % 2 == 0) {
-            int u = modPower(x, n/2, m);
-            return (int)(((long)u*u)%m);
-        }else {
-            return (modPower(x, n-1, m) * x)%m;
-        }
-    }
-
-    // fast reader
     static class FastReader {
  
         BufferedReader br;
