@@ -5,29 +5,36 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
-public class ReadingBooks {
+public class CoinCombinationsI {
+
+    private final static int m = 1000000007; 
+
     public static void main(String[] args) {
         FastReader scanner = new FastReader();
         PrintWriter out = new PrintWriter(new BufferedOutputStream(System.out));
 
         int n = scanner.nextInt();
+        int x = scanner.nextInt();
         int[] arr = new int[n];
         for(int i = 0; i < n; i++) {
             arr[i] = scanner.nextInt();
         }
-        out.println(solve(n, arr));
+        out.println(solve(x, n, arr));
         out.flush();
         out.close();
     }
 
-    private static long solve(int n, int[] arr) {
-        long sum = 0;
-        long maxVal = Integer.MIN_VALUE;
-        for (int i = 0; i < arr.length; i++) {
-            sum += arr[i];
-            maxVal = Math.max(maxVal, arr[i]);
+    private static int solve(int x, int n, int[] coins) {
+        int[] dp = new int[x+1];
+        dp[0] = 1;
+        for(int i = 1; i <= x; i++) {
+            for(int j = 0; j < n; j++) {
+                if(i >= coins[j]){
+                    dp[i] = (dp[i] + dp[i - coins[j]]) % m;
+                }
+            }
         }
-        return Math.max(sum,2*maxVal);
+        return dp[x];
     }
 
     static class FastReader {
