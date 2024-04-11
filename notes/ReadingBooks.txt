@@ -1,0 +1,10 @@
+Proof
+
+arr = [a, b, c]
+
+Given : 
+1. c > b > a (sorted arr)
+2. c < a + b (in this case sum > 2*c)
+
+We need show that no other waiting condition will occur
+which is basically => c + a > b + a, which is obvious.
